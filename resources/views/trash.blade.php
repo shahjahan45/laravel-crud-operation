@@ -6,11 +6,10 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-6">
-              <h4>All Posts</h4>
+              <h4>Trash Posts</h4>
             </div>
             <div class="justify-content-end col-md-5 d-flex">
-              <a class="btn btn-success mx-1" href="{{route('posts.create')}}">create</a>
-              <a class="btn btn-dark  mx-1">Trash</a>
+              <a class="btn btn-success  mx-1">back</a>
             </div>
           </div>
             
