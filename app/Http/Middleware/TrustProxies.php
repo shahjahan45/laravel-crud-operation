@@ -3,14 +3,14 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Middleware\TrustProxies as Middleware;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 class TrustProxies extends Middleware
 {
     /**
      * The trusted proxies for this application.
      *
-     * @var array<int, string>|string|null
+     * @var array|string|null
      */
     protected $proxies;
 
@@ -19,10 +19,23 @@ class TrustProxies extends Middleware
      *
      * @var int
      */
-    protected $headers =
-        Request::HEADER_X_FORWARDED_FOR |
-        Request::HEADER_X_FORWARDED_HOST |
-        Request::HEADER_X_FORWARDED_PORT |
-        Request::HEADER_X_FORWARDED_PROTO |
-        Request::HEADER_X_FORWARDED_AWS_ELB;
+    protected $headers = 0b00000010; // Use bitwise OR for multiple headers
+
+    /**
+     * The headers that should be used to detect proxies if using AWS load balancers.
+     *
+     * @var int
+     */
+    // protected $headers = Request::HEADER_X_FORWARDED_ALL;
+
+    /**
+     * Determine if the given request has a trusted IP address.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    public function trusts($request)
+    {
+        return true; // You may need to customize this logic based on your environment
+    }
 }

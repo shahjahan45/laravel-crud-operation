@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\category;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -30,12 +31,24 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image'=>['required', 'max:2028', 'image'],
+            'image'=>['required','max:2028','image'],
             'title'=>['required','max:255'],
             'category_id'=>['required'],
             'description'=>['required']
         ]);
-        dd('success');
+
+        
+        $fileName = time() . '_' . $request->image->getClientOriginalName();
+        $filePath = $request->file('image')->storeAs('uploads', $fileName, 'public');
+
+        $post = new Post();
+        
+        $post->title = $request->title;
+        $post->category_id = $request->category_id;
+        $post->description = $request->description;
+        $post->iamge = $filePath;
+        $post->save();
+        return redirect()->route('posts.index');
     }
 
     /**
