@@ -34,14 +34,12 @@
                     <input type="text" class="form-control" name="title">
                 </div>
                 <div class="form-group">
-                    <label for="" class="form-label mt-2" >category</label>
-                    <select name="" class="form-control" id="" name="category_id">
-                        <option value="">select</option>
+                    <label for="category_id" class="form-label mt-2">Category</label>
+                    <select name="category_id" id="category_id" class="form-control">
+                        <option value="">Select</option>
                         @foreach ($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
-                       
-                        
                     </select>
                 </div>
                 <div class="form-group" >

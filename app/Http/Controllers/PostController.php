@@ -32,8 +32,8 @@ class PostController extends Controller
         $request->validate([
             'image'=>['required', 'max:2028', 'image'],
             'title'=>['required','max:255'],
-            'category'=>['required','integer'],
-            'description'=>['required','']
+            'category_id'=>['required'],
+            'description'=>['required']
         ]);
         dd('success');
     }
