@@ -2,6 +2,13 @@
 @section('content')
 
 <div class="main-content mt-5">
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">{{$error}}</div>
+            
+        @endforeach
+            
+        @endif
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -14,22 +21,35 @@
             </div>
         </div>
         
+        
         <div class="card-body">
-            <form action="">
+            <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="form-group" >
-                    <label for="" class="form-label">image</label>
-                    <input type="file" class="form-control">
+                    <label for="" class="form-label ">image</label>
+                    <input type="file" class="form-control" name="image">
                 </div>
                 <div class="form-group" >
                     <label for="" class="form-label mt-2">title</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label mt-2" >category</label>
+                    <select name="" class="form-control" id="" name="category_id">
+                        <option value="">select</option>
+                        @foreach ($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                       
+                        
+                    </select>
                 </div>
                 <div class="form-group" >
                     <label for="" class="form-label mt-2">description</label>
-                    <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                    <div class="btn btn-primary mt-2">submit</div>
+                    <button type="submit" class="btn btn-primary mt-2" >submit</button>
                 </div>
             </form>
 

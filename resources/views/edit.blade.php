@@ -17,12 +17,20 @@
         <div class="card-body">
             <form action="">
                 <div class="form-group" >
-                    <label for="" class="form-label">image</label>
+                    <label for="" class="form-label mt-2">image</label>
                     <input type="file" class="form-control">
                 </div>
                 <div class="form-group" >
                     <label for="" class="form-label mt-2">title</label>
                     <input type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-control mt-2" >category</label>
+                    <select name="" id="" name="category_id">
+                        <option value="">test 1</option>
+                        <option value="">test 2</option>
+                        <option value="">test 3</option>
+                    </select>
                 </div>
                 <div class="form-group" >
                     <label for="" class="form-label mt-2">description</label>
