@@ -44,7 +44,7 @@
                     <td>{{$post->created_at}}</td>
                     <td>
                       <a class="btn-sm btn-success">show</a>
-                      <a class="btn-sm btn-primary">Edit</a>
+                      <a class="btn-sm btn-primary" href="{{route('posts.edit',$post->id)}}">Edit</a>
                       <a class="btn-sm btn-danger">update</a>
 
                     </td>

@@ -15,26 +15,32 @@
         </div>
         
         <div class="card-body">
-            <form action="">
+            <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <div class="form-group" >
+                    <div>
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="postimage" style="width: 200px">
+                    </div>
                     <label for="" class="form-label mt-2">image</label>
                     <input type="file" class="form-control">
                 </div>
                 <div class="form-group" >
                     <label for="" class="form-label mt-2">title</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="{{$post->title}}">
                 </div>
                 <div class="form-group">
-                    <label for="" class="form-control mt-2" >category</label>
-                    <select name="" id="" name="category_id">
-                        <option value="">test 1</option>
-                        <option value="">test 2</option>
-                        <option value="">test 3</option>
+                    <label for="category_id" class="form-label mt-2">Category</label>
+                    <select name="category_id" id="category_id" class="form-control">
+                        <option value="">Select</option>
+                        @foreach ($categories as $category)
+                            <option {{$category->id == $post->category_id ?'selected':''}} value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group" >
                     <label for="" class="form-label mt-2">description</label>
-                    <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="" id="" cols="30" rows="10" class="form-control">{{$post->description}}</textarea>
                 </div>
                 <div class="form-group">
                     <div class="btn btn-primary mt-2">submit</div>
