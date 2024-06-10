@@ -1,5 +1,10 @@
 @extends('layouts.master')
 @section('content')
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
 <div class="main-content">
     <div class="card">
@@ -10,7 +15,7 @@
             </div>
             <div class="justify-content-end col-md-5 d-flex">
               <a class="btn btn-success mx-1" href="{{route('posts.create')}}">create</a>
-              <a class="btn btn-dark  mx-1">Trash</a>
+              <a class="btn btn-dark  mx-1" href="{{route('posts.trashed')}}">Trash</a>
             </div>
           </div>
             
@@ -45,8 +50,15 @@
                     <td>
                       <a class="btn-sm btn-success" href="{{route('posts.show',$post->id)}}">show</a>
                       <a class="btn-sm btn-primary" href="{{route('posts.edit',$post->id)}}">Edit</a>
-                      <a class="btn-sm btn-danger">update</a>
+                      {{-- <a class="btn-sm btn-danger" href="{{route('posts.destroy',$post->id)}}">Delete</a> --}}
+                      <form action="{{route('posts.destroy',$post->id)}}" method="POST" class="mt-4">
+                        @csrf
+                        @method('DELETE')
 
+                        <button class="btn-sm btn-danger">
+                          Delete
+                        </button>
+                      </form>
                     </td>
                   </tr>  
                   @endforeach
