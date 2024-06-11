@@ -45,7 +45,7 @@
                     <td><img src="{{ asset('storage/' . $post->image) }}" alt="" width="80" height="80"></td>
                     <td>{{$post->title}}</td>
                     <td>{{$post->description}}</td>
-                    <td>{{$post->category_id}}</td>
+                    <td>{{$post->category->name}}</td>
                     <td>{{$post->created_at}}</td>
                     <td>
                       <a class="btn-sm btn-success" href="{{route('posts.show',$post->id)}}">show</a>
@@ -65,6 +65,9 @@
                  
                 </tbody>
               </table>
+              
+                {{ $posts->links() }}
+            
         </div>
     </div>
     
