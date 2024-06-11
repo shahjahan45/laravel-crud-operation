@@ -126,4 +126,21 @@ class PostController extends Controller
             $posts = Post::onlyTrashed()->get();
         return view('trash',compact('posts'));
     }
+
+    public function restore($id){
+
+        $post = Post::onlyTrashed()->findOrFail($id);
+        $post->restore();
+
+        return redirect()->route('posts.index')->with('success', 'Post restored successfully');
+
+
+    }
+
+    public function forcedelete($id){
+        $post = Post::onlyTrashed()->findOrFail($id);
+        $post->forceDelete();
+        File::delete(public_path('storage/' . $post->image));
+        return redirect()->route('posts.trashed')->with('success', 'Post permanently deleted successfully');
+    }
 }

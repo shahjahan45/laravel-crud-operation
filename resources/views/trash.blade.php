@@ -11,11 +11,11 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-6">
-              <h4>All Posts</h4>
+              <h4>TRashed  Posts</h4>
             </div>
             <div class="justify-content-end col-md-5 d-flex">
               <a class="btn btn-success mx-1" href="{{route('posts.create')}}">create</a>
-              <a class="btn btn-dark  mx-1">Trash</a>
+              <a class="btn btn-success  mx-1" href="{{route('posts.index')}}">back</a>
             </div>
           </div>
             
@@ -48,17 +48,21 @@
                     <td>{{$post->category_id}}</td>
                     <td>{{$post->created_at}}</td>
                     <td>
-                      <a class="btn-sm btn-success" href="{{route('posts.show',$post->id)}}">show</a>
-                      <a class="btn-sm btn-primary" href="{{route('posts.edit',$post->id)}}">Edit</a>
+                      <div class="d-flex">
+                        <a class="btn-sm btn-success" href="{{route('posts.restore',$post->id)}}">Restore</a>
+                        
+                        
+                        <form action="{{ route('posts.forcedelete',$post->id) }}" method="POST" class="mr-2">   
+                          @csrf
+                          @method('DELETE')
+  
+                          <button class="btn-sm btn-danger">
+                            Delete
+                          </button>
+                        </form>
+                      </div>
                       {{-- <a class="btn-sm btn-danger" href="{{route('posts.destroy',$post->id)}}">Delete</a> --}}
-                      <form action="{{route('posts.destroy',$post->id)}}" method="POST" class="mt-4">
-                        @csrf
-                        @method('DELETE')
-
-                        <button class="btn-sm btn-danger">
-                          Delete
-                        </button>
-                      </form>
+                      
                     </td>
                   </tr>  
                   @endforeach
